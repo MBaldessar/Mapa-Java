@@ -75,7 +75,7 @@ public class MAPABicicleta {
                     int indice = scanner.nextInt();
                     
                     if(indice > bikes.length - 1) {
-                        System.out.println("Opção inválida");
+                        System.out.println("Opção inválida! \n");
                         break;
                     }
                     
@@ -123,7 +123,6 @@ public class MAPABicicleta {
                     }
                     break;
                         
-                        
 	            case 4:
 	            	System.out.println("Criando cadastro de clientes. \n");
                         System.out.println("Cadastrando novo cliente. \n");
@@ -149,7 +148,7 @@ public class MAPABicicleta {
                         for (int i = 0; i < clientes.length; i++) {
                     	System.out.println("Índice " + i);
                     	clientes[i].listarClientes();
-                        }
+                    }
 
                         System.out.println("------------------------------------------------------------\n");
                         System.out.println("Digite o código do cliente que deseja fazer a alteração:");
@@ -157,11 +156,10 @@ public class MAPABicicleta {
                         Scanner scanner1 = new Scanner(System.in);
                         int indice1 = scanner1.nextInt();
                         
-                        if(indice1 > clientes.length - 1) {
-                        System.out.println("Opção inválida");
+                        if(indice1 > clientes.length -1) {
+                        System.out.println("Opção inválida! \n");
                         break;
-                        }
-                        
+                    }
                         
                         System.out.println("\nDigite o atributo do cliente que deseja fazer a alteração:");
                         System.out.println("1- Nome");
@@ -170,38 +168,37 @@ public class MAPABicicleta {
                         System.out.println("4- Telefone ");
 
                         int atributo1 = scanner1.nextInt();
-                        
+
                         switch(atributo1) {
                             case 1: 
-                                System.out.println("\nDigite o novo nome do cliente:");
-                                clientes[indice1].setNome(scanner1.next());
-                                System.out.print("Item alterado com sucesso!\n");
-                                break;
+                                    System.out.println("\nDigite o novo nome do cliente:");
+                                    clientes[indice1].setNome(scanner1.next());
+                                    System.out.print("Item alterado com sucesso!\n");
+                                    break;
 
                             case 2: 
-                                System.out.println("\nDigite o novo CPF do cliente:");
-                                clientes[indice1].setCpf(scanner1.next());
-                                System.out.print("Item alterado com sucesso!\n");
-                                break;
+                                    System.out.println("\nDigite o novo CPF do cliente:");
+                                    clientes[indice1].setCpf(scanner1.next());
+                                    System.out.print("Item alterado com sucesso!\n");
+                                    break;
 
                             case 3: 
-                                System.out.println("\nDigite o novo código do cliente:");
-                                clientes[indice1].setCodigo(scanner1.nextInt());
-                                System.out.print("Item alterado com sucesso!\n");
-                                break;
+                                    System.out.println("\nDigite o novo código do cliente:");
+                                    clientes[indice1].setCodigo(scanner1.nextInt());
+                                    System.out.print("Item alterado com sucesso!\n");
+                                    break;
 
                             case 4: 
-                                System.out.println("\nDigite o novo telefone do cliente:");
-                                clientes[indice1].setTelefone(scanner1.next());
-                                System.out.print("Item alterado com sucesso!\n");
-                                break;
+                                    System.out.println("\nDigite o novo telefone do cliente:");
+                                    clientes[indice1].setTelefone(scanner1.next());
+                                    System.out.print("Item alterado com sucesso!\n");
+                                    break;
 
-                            default: 
-                                System.out.println("Opção inválida!\n");
+                            default: System.out.println("Opção inválida!\n");
                             break;
                         }
-                            break;
-                          
+                        break;
+                            
 	            
 	            case 7: System.out.println("Abrindo contrato...");
 	            break;
