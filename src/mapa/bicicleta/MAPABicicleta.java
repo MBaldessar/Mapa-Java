@@ -1,5 +1,6 @@
 package mapa.bicicleta;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class MAPABicicleta {
@@ -10,6 +11,7 @@ public class MAPABicicleta {
         int op2;
         Bicicleta[] bikes = new Bicicleta[] {};
         Cliente[] clientes = new Cliente[] {};
+        Contrato[] contratos = new Contrato[] {};
         
         while(true){
 	        System.out.println("-------------------------------");
@@ -200,11 +202,33 @@ public class MAPABicicleta {
                         break;
                             
 	            
-	            case 7: System.out.println("Abrindo contrato...");
-	            break;
+	            case 7: 
+	            	System.out.println("Abrindo contrato...");
+	            	
+	            	// tem que pedir os atributos do contrato, vou colocar fixo mas tem que fazer o menu, pedir pelo índice, mesma coisa
+	            	int codigo = 1;
+	            	Cliente cliente = clientes[0]; // só pode selecionar 1 cliente
+
+	            	Contrato contrato = new Contrato(codigo, cliente);
+	            	
+	            	// aqui tá adicionando todas, mas tem que ser um menu que deixe o cliente ir escolhendo uma bike pra adicionar
+	            	// depois de adicionar, ele tem a opção de adicionar outra bike ou parar.
+	            	// à medida que ele for adicionando já vai atualizar a coleção de bikes e o valor do aluguel.
+	            	for (Bicicleta bike : bikes)
+	            		contrato.addBicicleta(bike);
+
+	            	contratos = Arrays.copyOf(contratos, contratos.length+1);
+	            	
+	            	// coloca o novo contrato na última posição
+	            	contratos[contratos.length-1] = contrato;
+	            	
+	            	break;
 	            
-	            case 8 : System.out.println("Listando contratos...");
-	            break;
+	            case 8 :
+	            	System.out.println("Listando contratos...");
+	            	for (Contrato c : contratos)
+	            		c.listarContrato();
+	            	break;
 	            
 	            default: System.out.println("Opção inválida");
 	            break;
