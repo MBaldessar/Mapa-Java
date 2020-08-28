@@ -5,13 +5,12 @@ import java.util.Scanner;
 
 public class MAPABicicleta {
 
+    static Bicicleta[] bikes = new Bicicleta[] {};
+    static Cliente[] clientes = new Cliente[] {};
+    static Contrato[] contratos = new Contrato[] {};
+	
     public static void main(String[] args) {
         int opcao;
-        int op1;
-        int op2;
-        Bicicleta[] bikes = new Bicicleta[] {};
-        Cliente[] clientes = new Cliente[] {};
-        Contrato[] contratos = new Contrato[] {};
         
         while(true){
 	        System.out.println("-------------------------------");
@@ -25,6 +24,7 @@ public class MAPABicicleta {
 	        System.out.println("6 - Alterar dados do cliente");
 	        System.out.println("7 - Abrir contrato");
 	        System.out.println("8 - Listar contratos");
+	        System.out.println("9 - Recadastrar contratos");
 	        System.out.println ("Opção: ");
 	        
 	        Scanner scan = new Scanner(System.in);
@@ -51,6 +51,7 @@ public class MAPABicicleta {
                                            "Digite o valor do aluguel: 100.00 \n\n" +
                                            "Bicicleta cadastrada com sucesso!");
 	            	bikes = cadastrarBicicletas();
+	            	cadastrarContratos();
 	                
 	            break;
 	            
@@ -134,6 +135,7 @@ public class MAPABicicleta {
                                            "Digite o telefone: " + "97458-5521 \n\n" + 
                                             "Cliente cadastrado com sucesso!");
 	            	clientes = cadastrarClientes();
+	            	cadastrarContratos();
 	                break;
 	            
 	            case 5: 
@@ -204,23 +206,22 @@ public class MAPABicicleta {
 	            
 	            case 7: 
 	            	System.out.println("Abrindo contrato...");
-	            	
-	            	// tem que pedir os atributos do contrato, vou colocar fixo mas tem que fazer o menu, pedir pelo índice, mesma coisa
-	            	int codigo = 1;
-	            	Cliente cliente = clientes[0]; // só pode selecionar 1 cliente
 
-	            	Contrato contrato = new Contrato(codigo, cliente);
-	            	
-	            	// aqui tá adicionando todas, mas tem que ser um menu que deixe o cliente ir escolhendo uma bike pra adicionar
-	            	// depois de adicionar, ele tem a opção de adicionar outra bike ou parar.
-	            	// à medida que ele for adicionando já vai atualizar a coleção de bikes e o valor do aluguel.
-	            	for (Bicicleta bike : bikes)
-	            		contrato.addBicicleta(bike);
+	            	for (Contrato c : contratos)
+	            		c.listarContrato();
 
-	            	contratos = Arrays.copyOf(contratos, contratos.length+1);
+                    System.out.println("------------------------------------------------------------\n");
+                    System.out.println("Digite o código do contrato que deseja abrir:");
+
+                    Scanner scanner7 = new Scanner(System.in);
+                    int indice7 = scanner7.nextInt();
+                    
+                    if(indice7 > contratos.length) {
+                    	System.out.println("Opção inválida! \n");
+                    	break;
+                    }
 	            	
-	            	// coloca o novo contrato na última posição
-	            	contratos[contratos.length-1] = contrato;
+                    contratos[indice7-1].abrirContrato();
 	            	
 	            	break;
 	            
@@ -229,19 +230,26 @@ public class MAPABicicleta {
 	            	for (Contrato c : contratos)
 	            		c.listarContrato();
 	            	break;
-	            
+
+	            case 9 :
+	            	System.out.println("Recadastrando contratos...");
+	            	cadastrarContratos();
+	            	break;
+	            	
 	            default: System.out.println("Opção inválida");
 	            break;
-	        
+	        }
         }
     }
-}
     
     private static Bicicleta[] cadastrarBicicletas() {
-        Bicicleta[] bikes = new Bicicleta[3];
-        bikes[0] = new Bicicleta(1, "verde", "Barra circular", 1, 150.00);
-        bikes[1] = new Bicicleta(2, "vermelha", "Mountain Bike", 18, 250.00);
-        bikes[2] = new Bicicleta(3, "amarela", "Street", 1, 100.00);
+        Bicicleta[] bikes = new Bicicleta[6];
+        bikes[0] = new Bicicleta(3529, "verde", "Barra circular", 1, 150.00);
+        bikes[1] = new Bicicleta(4783, "vermelha", "Mountain Bike", 18, 250.00);
+        bikes[2] = new Bicicleta(5921, "amarela", "Street", 1, 100.00);
+        bikes[3] = new Bicicleta(8793, "roxa", "Caloi", 21, 150.00);
+        bikes[4] = new Bicicleta(1922, "preta", "Ceci Infantil", 12, 50.00);
+        bikes[5] = new Bicicleta(1985, "cinza", "Specialized", 24, 1200.00);
         return bikes;
     }
     
@@ -252,6 +260,26 @@ public class MAPABicicleta {
         clientes[2] = new Cliente("Vivian", "012.326.789-44", 3, "97458-5521");
         return clientes;
     }
-        
+    
+    private static void cadastrarContratos() {
+    	contratos = new Contrato[] {};
+    	
+    	// tem que pedir os atributos do contrato, vou colocar fixo mas tem que fazer o menu, pedir pelo índice, mesma coisa
+    	for (int i = 0; i < clientes.length; i++)
+    	{
+        	int codigo = i+1;
+        	Contrato contrato = new Contrato(codigo, clientes[i]);
+
+        	if (bikes.length > 0) { // só para garantir que já estão cadastradas
+        		contrato.addBicicleta(bikes[i]);
+        		contrato.addBicicleta(bikes[i+3]);
+        	}
+
+        	// lógica para aumentar a coleção e adicionar o contrato na coleção
+        	contratos = Arrays.copyOf(contratos, contratos.length+1);
+        	contratos[contratos.length-1] = contrato;
+    	}
     }
+        
+}
     

@@ -37,12 +37,20 @@ public class Contrato {
     public void addBicicleta(Bicicleta bicicleta) {
         // vai aumentando o array em 1 posição pra suportar a nova bike, sempre
     	bicicletas = Arrays.copyOf(bicicletas, bicicletas.length+1);
-    	
+
     	// coloca a nova bike na última posição
     	bicicletas[bicicletas.length-1] = bicicleta;
         
         // adiciona o valor da bike adicionada no aluguel
         this.valorContrato += bicicleta.getValorAluguel();
+    }
+
+    public void abrirContrato() {
+    	System.out.println("Código: " + codigoContrato);
+    	System.out.println("Cliente: " + cliente.getNome());
+    	System.out.println("Valor total: " + valorContrato);
+    	System.out.println("Bicicletas");
+    	listarBicicletas();
     }
     
     public void listarBicicletas() {
@@ -51,8 +59,7 @@ public class Contrato {
     }
     
     public void listarContrato() {
-    	// tem que fazer a lógica aqui pra ir listando o contrato e suas bicicletas
-    	listarBicicletas();
+    	System.out.println("Contrato código " + codigoContrato + ", Cliente: " + cliente.getNome());
     }
 }
 
